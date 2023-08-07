@@ -38,6 +38,8 @@ json parseObject(istringstream& input) {
 
     while (input.peek() != '}') {
         skipWhitespace(input);
+        if (input.peek() == '}') // Check for empty object
+            return {};
         key = parseString(input); // Extract the value from the JsonValue object
         skipWhitespace(input);
 
@@ -73,4 +75,29 @@ json parseJson(istringstream& input) {
     data = parseObject(input);
 
 	return data;
+}
+
+int main()
+{
+    string example = R"(
+"Manifest"
+{
+    "name"                 "Application"
+    "id"                       "123090291"
+    "moreData"
+    {
+        "extras"           "true"
+    }
+    "blanktest"
+    {
+    }
+}
+)";
+
+    istringstream inputStream(example);
+    json data = parseJson(inputStream);
+
+    cout << data.dump(4) << endl;
+
+    return 0;
 }
