@@ -1,3 +1,10 @@
+// #############################################
+// # Author: scameronpaul                      #
+// # File: ManifestParser.hpp                  #
+// # Description: Parses Steam manifest files  #
+// #              and returns a json object    #
+// #############################################
+
 #ifndef JSON_PARSER_HPP
 #define JSON_PARSER_HPP
 
