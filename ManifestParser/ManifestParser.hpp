@@ -5,9 +5,7 @@
 // #              and returns a json object    #
 // #############################################
 
-#ifndef JSON_PARSER_HPP
-#define JSON_PARSER_HPP
-
+#pragma once
 #include <iostream>
 #include <sstream>
 #include <unordered_map>
@@ -74,8 +72,12 @@ namespace m_parser
         std::string line;
         std::getline(input, line);
 
-        // Consume the opening curly brace
-        while (input.peek() != '{') {
+        // Consume the opening curly brace and check for empty object
+        while (input.peek() != '{')
+        {
+            // Avoid infinite loop if file is empty
+            if (input.peek() == EOF)
+                return json::object();
             input.get();
         } input.get();
 
@@ -85,5 +87,3 @@ namespace m_parser
         return data;
     }
 }
-
-#endif // JSON_PARSER_HPP
